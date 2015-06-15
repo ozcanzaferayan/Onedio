@@ -8,7 +8,10 @@ function retrieveNews (callback, params) {
     success: function (response) {
     	console.log(params);
     	console.info("News retrieved");
+        // Caching response
     	localStorage.news = JSON.stringify(response);
+        // caching DOM elements
+        localStorage.newsDOM = createNewsDOM(response);
     	console.log(response);
     	params[0] = response;
     	return callback(params);
@@ -19,3 +22,42 @@ function retrieveNews (callback, params) {
     }
   });
 }
+
+// Builds li items for ul element
+function createNewsDOM (data) {
+    var liDOM = "";
+    $(data.results).each(function(i,v){
+        // Removes adds
+        if (IsFeatured(v)){
+            return true;
+        }
+        var image = stripHTML(v.main_image);
+        var link  = stripHTML(v.link);
+        var date  = stripHTML(v.content_value);
+        var title = stripHTML(v.description);
+        var desc  = stripHTML(v.content_description);
+        var fbVal = stripHTML(v.facebook_value);
+        var twVal = stripHTML(v.twitter_number);
+        if (fbVal != "" && twVal != ""){
+          fbVal = '<span class="fa fa-facebook">&nbsp;</span>' + fbVal + '&nbsp;&nbsp;';
+          twVal = '<span class="fa fa-twitter">&nbsp;</span>' + twVal;
+        }
+        liDOM += 
+          '<li class="newListAnim">' +
+          ' <a href="' + link + '" target="_blank">'+
+          '   <img src="' + image + '">' +
+          '   <div class="details">' +
+          '     <div class="title">' + title + '</div>' +
+          '     <div class="ep">' + desc + '</div>' +
+          '     <div class="likes">' + 
+                fbVal + 
+                twVal +  
+          '     </div>' +  
+          '     <div class="date">' + date + '</div>' +
+          '   </div>' +
+          ' </a>' +
+          '</li>';
+    });
+    return liDOM;
+}
+

@@ -91,7 +91,7 @@ function checkForNewAnimes(params){
   $(newNewsList).each(function(i,v){
     // if new has date its featured new
     // So we dont notificate user for featured news
-    if (v.featured_image !== undefined){
+    if (IsFeatured(v)){
       return true;
     }
     var isFind = false;
@@ -106,6 +106,10 @@ function checkForNewAnimes(params){
     });
     // If new new not exists old list, add badge
     if(!isFind){
+      // Is retrieved date newest
+      if (!isNewNews(v, oldNewsList[0])){
+        return true;
+      }
       localStorage.unreadCount = parseInt(localStorage.unreadCount) + 1;
       console.info("Yeni anime var:");
       console.log(v);
