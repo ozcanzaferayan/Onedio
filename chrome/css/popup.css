@@ -4,7 +4,6 @@ body {
   font-size: 13px;
   margin: 0px;
   overflow: hidden;
-  width: 500px;
 }
 
 ul#newList {
@@ -63,16 +62,12 @@ li a {
 	overflow:hidden;
 }
 
-li a:hover {
-	color: #4183D7;
-}
-
 img{
 	border-radius: 4px;
 }
 
 li img {
-	margin-right:10px;
+	width: 100px;
 	display:block;
 	float:left;
 	border-radius:5px;
@@ -84,7 +79,9 @@ li img {
 }
 
 ul#newList li div.details{
-	margin-right:10px;
+	width:250px;
+	float:left;
+	margin-left:10px;
 }
 
 ul#newList li div.title{
@@ -100,20 +97,18 @@ ul#newList li div.ep{
 }
 
 ul#newList li div.likes{
-	display: inline-block;
-	position: absolute;
 	font-size: 15px;
 	font-weight:normal;
 	color:#aaa;
-	bottom: 5px;
+	bottom:30px;
+	right:10px;
 	float:left;
 }
 
 ul#newList li div.date {
-	position: absolute;
 	color: #aaa;
   	float: right;
-  	bottom: 5px;
+  	bottom: 10px;
   	right: 10px;
   	font-size: 15px;
 }

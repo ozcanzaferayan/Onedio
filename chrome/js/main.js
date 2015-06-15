@@ -16,19 +16,3 @@ function removeBadge() {
   }
   localStorage.unreadCount = 0;
 }
-
-function IsFeatured(news){
-	if (news.content_value === undefined || 
-		news.featured_link !== undefined){
-		return true;
-    }
-    else {
-    	return false;
-    }
-}
-
-// Is retrieved date newest
-function isNewNews(nev, old) {
-	return nev.content_value > old.content_value ? 
-		true : false;
-}
