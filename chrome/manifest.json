@@ -1,0 +1,26 @@
+{
+  "name": "Onedio",
+  "manifest_version": 2,
+  "version": "0.9.4",
+  "description": "Onedio içeriklerine ulaşmanın en kolay yolu",
+  "browser_action": {
+      "default_title": "Onedio",
+      "default_icon": "img/icon.png",
+      "default_popup": "popup.html"
+  },
+  "icons":{
+    "128":"img/icon.png"
+  },
+  "options_page": "options.html",
+  "background": { 
+    "scripts": 
+    [
+      "js/jquery-2.1.0.min.js",
+      "js/main.js",
+      "js/requests.js",
+      "js/background.js"
+    ] },
+  "permissions": [
+    "notifications" 
+  ]
+}
