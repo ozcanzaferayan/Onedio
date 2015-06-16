@@ -29,6 +29,16 @@ function IsFeatured(news){
 
 // Is retrieved date newest
 function isNewNews(nev, old) {
-	return nev.content_value > old.content_value ? 
-		true : false;
+	var newDate = nev.content_value;
+	var oldDate = old.content_value;
+	var newDay = newDate.split(' ')[0];
+	var newMonth = newDate.split(' ')[1];
+	var oldDay = oldDate.split(' ')[0];
+	var oldMonth = oldDate.split(' ')[1];
+	if (newMonth == oldMonth) {
+		return (newDay > oldDay) ? true : false;
+	}
+	else {
+		return true;
+	}
 }
