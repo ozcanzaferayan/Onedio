@@ -8,10 +8,15 @@ function retrieveNews (callback, params) {
     success: function (response) {
     	console.log(params);
     	console.info("News retrieved");
-        // Caching response
+      // Sort news by date
+      response.results.sort(function(a, b) {
+          return isNewNews(a, b);
+      });
+
+      // Caching response
     	localStorage.news = JSON.stringify(response);
-        // caching DOM elements
-        localStorage.newsDOM = createNewsDOM(response);
+      // caching DOM elements
+      localStorage.newsDOM = createNewsDOM(response);
     	console.log(response);
     	params[0] = response;
     	return callback(params);

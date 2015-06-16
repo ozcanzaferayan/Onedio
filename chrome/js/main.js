@@ -33,10 +33,12 @@ function isNewNews(nev, old) {
 	var oldDate = old.content_value;
 	var newDay = newDate.split(' ')[0];
 	var newMonth = newDate.split(' ')[1];
+	var newHour = newDate.split(' ')[2];
 	var oldDay = oldDate.split(' ')[0];
 	var oldMonth = oldDate.split(' ')[1];
+	var oldHour = oldDate.split(' ')[2];
 	if (newMonth == oldMonth) {
-		return (newDay > oldDay) ? true : false;
+		return (newHour > oldHour) ? true : false;
 	}
 	else {
 		return true;
