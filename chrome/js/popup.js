@@ -2,22 +2,10 @@ document.addEventListener('DOMContentLoaded', main);
 
 function main() {
   removeBadge();
-  getItems();
-
+  fillItems(undefined);
 }
-
-function getItems(){
-  if (localStorage.newsDOM === undefined){
-    retrieveNews(fillItems, []);
-  }
-  else {
-    fillItems(undefined);
-  }
-}
-
 
 function fillItems(data){
-  console.log("fillItems executing..");
   var liDOM = localStorage.newsDOM;
   $('ul#newList').html(liDOM);
 }

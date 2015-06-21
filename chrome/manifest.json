@@ -17,12 +17,12 @@
     [
       "js/jquery-2.1.0.min.js",
       "js/main.js",
+      "js/storage.js",
       "js/requests.js",
       "js/background.js"
     ] },
   "permissions": [
-    "notifications",
-    "http://*.unilad.co.uk/wp-content/uploads/2015/06/SIT22-320x213.jpg"
+    "notifications"
   ]
 
 }

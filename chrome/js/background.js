@@ -1,9 +1,7 @@
-var intervalNewAnimeList; // Yeni animeleri getirme aralığı
-var intervalAllAnimeList; // Tüm animeleri getirme aralığı
-var notTimeout = 10000; // 10sn boyunca notification açık kalacak 
-var apiFrequencyMilis = 15 * 60 * 1000; // 15dk API crawl aralığı
+var intervalForNews; // News getting interval
+var notTimeout = 10000; // Notification opens for 10 sec
 var intervalOptions = 60 * 1000; // Ayarları çekme aralığı
-var soundPath = "../mp3/waterdrop.mp3"; // Bildirim sesi
+var soundPath = "../mp3/notification.mp3"; // Bildirim sesi
 var options;
 
 
@@ -26,14 +24,14 @@ $(document).ready(function(){
 function setServiceIntervals(){
   setInterval(function(){
     getNews();
-  }, intervalNewAnimeList);
+  }, intervalForNews);
   setInterval(function(){
     getOptions();
-  }, intervalNewAnimeList);
+  }, intervalOptions);
 }
 
 function setIntervals(){
-  intervalNewAnimeList = options.timeForNewAnimes * 60 * 1000;
+  intervalForNews = options.timeForNewAnimes * 60 * 1000;
 }
 
 // Gets options from localStorage
@@ -86,9 +84,11 @@ function checkForNewAnimes(params){
   console.info("Different news checking..");
   var addedNews = [];
   if ($.isEmptyObject(localNews)) return;
-  var oldNewsList = localNews.results;
-  var newNewsList = newNews.results;
+  var oldNewsList = localNews;
+  var newNewsList = newNews;
   $(newNewsList).each(function(i,v){
+    // Compare first 10 elements
+    if(i >= 10) return false;
     // if new has date its featured new
     // So we dont notificate user for featured news
     if (IsFeatured(v)){
@@ -106,10 +106,12 @@ function checkForNewAnimes(params){
     });
     // If new new not exists old list, add badge
     if(!isFind){
-      // Is retrieved date newest
-      if (!isNewNews(v, oldNewsList[0])){
+      var oldMaxDate = getNewestDate(oldNewsList);
+      // Is retrieved news old
+      if (new Date(v.update_date) < new Date(oldMaxDate)){
         return true;
       }
+      // Retrieved news is new so create Notification
       localStorage.unreadCount = parseInt(localStorage.unreadCount) + 1;
       console.info("Yeni anime var:");
       console.log(v);
