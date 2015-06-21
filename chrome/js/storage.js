@@ -1,6 +1,8 @@
 function prepareForStorage (data) {
 	var dataForStorage = [];
 	$(data).each(function(i, v){
+		// if is featured, dont add to the news
+		if(IsFeatured(v)) return true;
 		dataForStorage.push({
 			id                    	 : 	i,
 			link                  	 : 	v.link, 
@@ -21,5 +23,9 @@ function prepareForStorage (data) {
 		});
 
 	});
+	console.debug();
+	dataForStorage.reverse(function(a, b) {
+    	return Date.parse( a.update_date ) > Date.parse( b.update_date);
+	}).reverse();
 	return dataForStorage;
 }

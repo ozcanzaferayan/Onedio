@@ -2,6 +2,7 @@
   "name": "Onedio",
   "manifest_version": 2,
   "version": "0.9.4",
+  "update_url": "https://github.com/ozcanzaferayan/onedio/master/chrome/updates.xml",
   "description": "Onedio içeriklerine ulaşmanın en kolay yolu",
   "browser_action": {
       "default_title": "Onedio",
